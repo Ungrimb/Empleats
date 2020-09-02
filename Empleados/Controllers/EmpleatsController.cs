@@ -22,7 +22,7 @@ namespace Empleados.Controllers
 
         // GET: api/Empleats
         [HttpGet]
-        public String GetEmpleats()
+        /*public String GetEmpleats()
         {
 
             return "Hola Mundo";
@@ -35,8 +35,8 @@ namespace Empleados.Controllers
         {
             String retorno = "Hola " + Name;
             return retorno;
-        }
-        /*public async Task<ActionResult<IEnumerable<Empleat>>> GetEmpleats()
+        }*/
+        public async Task<ActionResult<IEnumerable<Empleat>>> GetEmpleats()
         {
             return await _context.Empleats.ToListAsync();
         }
@@ -85,7 +85,7 @@ namespace Empleados.Controllers
             }
 
             return NoContent();
-        }*/
+        }
 
         // POST: api/Empleats
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
