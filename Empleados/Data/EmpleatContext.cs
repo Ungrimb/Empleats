@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Empleados.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Empleados.Models
+namespace Empleados.Data
 {
     public class EmpleatContext : DbContext
     {
@@ -13,7 +14,10 @@ namespace Empleados.Models
             : base(options)
         {
         }
-
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
         public DbSet<Empleat> Empleats { get; set; }
 
     }

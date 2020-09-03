@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Empleados.Models;
+using Empleados.Data;
 
 namespace Empleados
 {
@@ -28,7 +29,7 @@ namespace Empleados
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<EmpleatContext>(opt =>
-               opt.UseInMemoryDatabase("EmpleatsList"));
+               opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
         }
 

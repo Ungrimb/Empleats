@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Empleados.Models;
+using Empleados.Data;
 
 namespace Empleados.Controllers
 {

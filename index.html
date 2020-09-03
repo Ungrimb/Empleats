@@ -1,0 +1,22 @@
+<script type="text/javascript">
+    function GetEmpleado() {
+
+      var Empleado = {};
+      Empleado.name = $("#name").val();
+      Empleado.surname = $("#surname").val();
+
+      $.ajax({
+         url: 'https://localhost:44307/api/Empleats',
+         method: 'GET',
+         dataType: 'json',
+         contentType: 'application/json; charset=utf-8',
+         data: Empleado,
+         success: function (data) {
+          alert("Saved successfully");
+         },
+        fail : function( jqXHR, textStatus ) {
+          alert( "Request failed: " + textStatus );
+        }
+     })
+  }
+</script>
