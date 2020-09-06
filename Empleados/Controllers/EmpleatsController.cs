@@ -23,20 +23,6 @@ namespace Empleados.Controllers
 
         // GET: api/Empleats
         [HttpGet]
-        /*public String GetEmpleats()
-        {
-
-            return "Hola Mundo";
-
-        }
-
-        // GET: api/Empleats/Pedro
-        [HttpGet("{Name}")]
-        public String GetEmpleats(String Name)
-        {
-            String retorno = "Hola " + Name;
-            return retorno;
-        }*/
         public async Task<ActionResult<IEnumerable<Empleat>>> GetEmpleats()
         {
             return await _context.Empleats.ToListAsync();

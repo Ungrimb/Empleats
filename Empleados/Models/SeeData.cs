@@ -29,14 +29,14 @@ namespace Empleados.Models
                         Nom = "Ismael",
                         Cognom = "Anaya",
                         Càrrec = "CTO",
-                        Sou = 40000
+                        Sou = "40000"
                     },
                     new Empleat
                     {
                         Nom = "Patricia",
                         Cognom = "Costa",
                         Càrrec = "CEO",
-                        Sou = 60000
+                        Sou = "60000"
                     }
                     );
                 context.SaveChanges();

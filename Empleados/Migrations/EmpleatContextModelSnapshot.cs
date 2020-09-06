@@ -34,8 +34,8 @@ namespace Empleados.Migrations
                     b.Property<string>("Nom")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Sou")
-                        .HasColumnType("float");
+                    b.Property<string>("Sou")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

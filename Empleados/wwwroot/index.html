@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Empleados App</title>
+</head>
+<body>
+
+    <div>
+        <h2>Todos los Empleados</h2>
+        <ul id="empleats" />
+    </div>
+    <div>
+        <h2>Busqueda por ID</h2>
+        <input type="text" id="emplId" size="5" />
+        <input type="button" value="Buscar" onclick="find();" />
+        <p id="empleat" />
+    </div>
+    <div>
+        <h2>Añadir Empleado</h2>
+        <h4>Nom_____Cognom___Càrrec___Sou</h4>
+        <input type="text" id="emplNom" size="5" />
+        <input type="text" id="emplCognom" size="5" />
+        <input type="text" id="emplCarrec" size="5" />
+        <input type="text" id="emplSou" size="5" />
+        <input type="button" id="btnGet" value="Añadir";" />
+        <p id="newEmpleat" />
+    </div>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script>
+    <script>
+        var uri = 'api/Empleats';
+
+        $(document).ready(function () {
+            // Send an AJAX request
+            $.getJSON(uri)
+                .done(function (data) {
+                    // On success, 'data' contains a list of products.
+                    $.each(data, function (key, item) {
+                        // Add a list item for the product.
+                        $('<li>', { text: formatItem(item) }).appendTo($('#empleats'));
+                    });
+                });
+        });
+
+        function formatItem(item) {
+            var output = item.càrrec + ': ' + item.nom + ' ' + item.cognom + ', ' + item.sou + '€';
+            return output;
+        }
+
+        function find() {
+            var id = $('#emplId').val();
+            $.getJSON(uri + '/' + id)
+                .done(function (data) {
+                    $('#empleat').text(formatItem(data));
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#empleat').text('Error: ' + err);
+                });
+        }
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#btnGet").click(function () {
+                var name = $("#emplNom").val();
+                var surname = $("#emplCognom").val();
+                var cargo = $("#emplCarrec").val();
+                var salary = $("#emplSou").val();
+                var output = { nom: name, cognom: surname, càrrec: cargo, sou: salary };
+                $.ajax({
+                    type: "POST",
+                    url: uri,
+                    //data: '{nom: "' + $("#emplNom").val() + '",cognom: "' + $("#emplCognom").val() + '",càrrec: "' + $("#emplCarrec").val() + '",sou: "' + $("#emplSou").val() + '" }',
+                    data: JSON.stringify(output),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'text',
+                    success: function (response) {
+                        alert(response);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

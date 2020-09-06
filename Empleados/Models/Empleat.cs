@@ -13,7 +13,7 @@ namespace Empleados.Models
         public string Nom { get; set; }
         public string Cognom { get; set; }
         public string Càrrec { get; set; }
-        public double Sou { get; set; }
+        public string Sou { get; set; }
 
     }
 }
