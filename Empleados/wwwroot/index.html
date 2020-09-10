@@ -16,14 +16,31 @@
         <p id="empleat" />
     </div>
     <div>
+        <h2>Borrar por ID</h2>
+        <input type="text" id="emplId2" size="5" />
+        <input type="button" value="Borrar" onclick="deleting();" />
+        <p id="delEmpleat" />
+    </div>
+    <div>
         <h2>Añadir Empleado</h2>
         <h4>Nom_____Cognom___Càrrec___Sou</h4>
         <input type="text" id="emplNom" size="5" />
         <input type="text" id="emplCognom" size="5" />
         <input type="text" id="emplCarrec" size="5" />
         <input type="text" id="emplSou" size="5" />
-        <input type="button" id="btnGet" value="Añadir";" />
+        <input type="button" id="btnGet" value="Añadir" ;" />
         <p id="newEmpleat" />
+    </div>
+    <div>
+        <h2>Update Empleado</h2>
+        <h4>Id________Nom_____Cognom___Càrrec___Sou</h4>
+        <input type="text" id="emplId3" size="5" />
+        <input type="text" id="emplNom3" size="5" />
+        <input type="text" id="emplCognom3" size="5" />
+        <input type="text" id="emplCarrec3" size="5" />
+        <input type="text" id="emplSou3" size="5" />
+        <input type="button" id="btnUpdate" value="Update" ;" />
+        <p id="upEmpleat" />
     </div>
 
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script>
@@ -57,10 +74,21 @@
                     $('#empleat').text('Error: ' + err);
                 });
         }
+        function deleting() {
+            var id = $('#emplId2').val();
+            $.ajax({ url: uri + '/' + id, method: "DELETE" })
+                .then(function (data) {
+                    $('#delEmpleat').text(formatItem(data));
+                })
+                .catch(function (err) {
+                    $('#delEmpleat').text('Error: ' + err);
+                });
+        }
     </script>
     <script type="text/javascript">
         $(function () {
             $("#btnGet").click(function () {
+                var id = $('#emplId').val();
                 var name = $("#emplNom").val();
                 var surname = $("#emplCognom").val();
                 var cargo = $("#emplCarrec").val();
@@ -74,7 +102,37 @@
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'text',
                     success: function (response) {
-                        alert(response);
+                        alert(response.responseText);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#btnUpdate").click(function () {
+                var id = $('#emplId3').val();
+                var intId = parseInt(id);
+                var name = $("#emplNom3").val();
+                var surname = $("#emplCognom3").val();
+                var cargo = $("#emplCarrec3").val();
+                var salary = $("#emplSou3").val();
+                var output = { id: intId, nom: name, cognom: surname, càrrec: cargo, sou: salary };
+                $.ajax({
+                    type: "PUT",
+                    url: uri + '/' + id,
+                    //data: '{nom: "' + $("#emplNom").val() + '",cognom: "' + $("#emplCognom").val() + '",càrrec: "' + $("#emplCarrec").val() + '",sou: "' + $("#emplSou").val() + '" }',
+                    data: JSON.stringify(output),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'text',
+                    success: function (response) {
+                        alert(response.responseText);
                     },
                     failure: function (response) {
                         alert(response.responseText);
